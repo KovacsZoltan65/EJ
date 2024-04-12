@@ -1,0 +1,123 @@
+https://www.youtube.com/watch?v=8shjc0Lc5xM&list=PL7AW_NSV7oihGyY4RXVxolw3q7wVoRwT8&ab_channel=BetweenJobs
+
+https://github.com/aloha202/laravel9_inertia_vue_crud
+
+echo "# HQ" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/KovacsZoltan65/HQ.git
+git push -u origin main
+
+composer require laravel/jetstream
+
+php artisan jetstream:install inertia
+
+php artisan migrate
+
+php artisan make:model Book --all
+
+// ---------------------------------------
+// Routing
+// ---------------------------------------
+php artisan route:list --name=users
+
+// ---------------------------------------
+// Design
+// ---------------------------------------
+ICONS:
+    https://heroicons.com/
+
+TAILWIND:
+    https://tailwindcss.com/
+    https://tailwindui.com/
+
+Flowbite:
+    https://flowbite.com/
+    npm install flowbite
+
+design: Admin One
+    https://github.com/justboil/admin-one-vue-tailwind
+    https://justboil.github.io/admin-one-vue-tailwind/#/dashboard
+
+// ---------------------------------------
+// Roles and Permissions
+// ---------------------------------------
+https://laraveltuts.com/laravel-9-vue-js-roles-and-permission-vite-js/
+
+composer require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan optimize:clear
+# or
+php artisan config:clear
+
+php artisan migrate
+
+superadmin@laraveltuts.com
+password
+admin@laraveltuts.com
+password
+test@laraveltuts.com
+password
+
+// ---------------------------------------
+// Validation
+// ---------------------------------------
+https://www.youtube.com/watch?v=25JbDjHWzsE
+https://laraveldaily.com/post/laravel-8-vue-3-crud-composition-api
+https://github.com/LaravelDaily/Laravel-Vue-3-Composition-API-CRUD
+
+// ---------------------------------------
+// Repository
+// ---------------------------------------
+composer require prettus/l5-repository
+
+
+// ---------------------------------------
+// Localization
+// ---------------------------------------
+https://lokalise.com/blog/laravel-localization-step-by-step/
+npm install laravel-vue-i18n
+app.js módosítása:
+    .use(i18nVue, {
+        resolve: lang => import(`../../lang/${lang}.json`),
+    })
+web.php módosítása a nyelv váltáshoz:
+    Route::get('/greeting/{locale}', function(string $locale){
+        if( !in_array($locale, ['en', 'hu']) ){
+            abort(400);
+        }
+
+        App::setlocale($locale);
+    });
+Aktuális nyelv lekérése:
+    import { getActiveLanguage } from 'laravel-vue-i18n';
+    const lang = getActiveLanguage(); // en
+
+// ---------------------------------------
+// MIGRATIONS TO MYSQL
+// ---------------------------------------
+composer require kitloong/laravel-migrations-generator --dev
+php artisan migrate:generate    // OK
+php artisan migrate:generate --tables="table1,table2,table3,table4,table5"
+php artisan migrate:generate --ignore="table3,table4,table5"
+
+// ---------------------------------------
+// MODELS TO MYSQL
+// ---------------------------------------
+composer require reliese/laravel --dev
+php artisan vendor:publish --tag=reliese-models
+php artisan config:clear
+php artisan code:models // OK
+php artisan code:models --table=users
+php artisan code:models --connection=mysql
+php artisan code:models --schema=shop
+
+// ---------------------------------------
+// SEEDS TO MYSQL
+// ---------------------------------------
+composer require schubu/iseed --dev
+composer require cheesegrits/iseed --dev
+php artisan iseed 'books, ...'
+
