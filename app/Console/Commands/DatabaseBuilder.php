@@ -69,8 +69,20 @@ class DatabaseBuilder extends Command //implements PromptsForMissingInput
         // Inicializálás
         $this->init();
         
+        /**
+         * A folyamatok listája, amelyeket végre kell hajtani
+         *
+         * @var array
+         */
         $processes = [
-            'mysqlExport','migration','seeding','mysqlImport'
+            // MySQL adatbázis exportálása
+            'mysqlExport',
+            // Migració futtatása
+            'migration',
+            // Adat betöltése
+            'seeding',
+            // MySQL adatbázis importálása
+            'mysqlImport',
         ];
 
         $aa = $this->withProgressBar($processes, function($process){
@@ -93,12 +105,13 @@ class DatabaseBuilder extends Command //implements PromptsForMissingInput
     private function checkExportFolder()
     {
         if( $this->export_path !== '' ) {
-            // Export könyvtár elérési útjának összeállítása
-            // és ellenőrzése. Ha nincs, létrehozza.
+            
             if( !strpos( $this->export_path, $this->storage_path ) ) {
                 $this->export_path = $this->storage_path . $this->export_path . '/' . $this->db_name;
             }
             
+            // Export könyvtár elérési útjának összeállítása
+            // és ellenőrzése. Ha nincs, létrehozza.
             if( !\Storage::exists($this->export_path) ) {
                 \Storage::makeDirectory($this->export_path, 0775, true); //creates directory
             }
